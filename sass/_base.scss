@@ -13,3 +13,49 @@ $color-grey-dark-2: #6D5D4B;
 // FONT VARIABLES
 $font-primary: 'Nunito', sans-serif;
 $font-display: 'Josefin Sans', sans-serif;
+
+
+// GLOBAL RESET
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%;
+}
+
+body {
+    font-family: $font-primary;
+    color: $color-grey-dark-2;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.container {
+    display: grid;
+    grid-template-rows: 80vh min-content 40vw repeat(3, min-content); 
+        // Row: 
+        // 1) Header - scales to 80% of viewport height 
+        // 2) Realtors - min-space/height for the content 
+        // 3) Story - scale to 40% of viewport width
+        // 4) Homes / Gallery / Footer - min-space/height for the content
+    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end]; 
+        // Columns:
+        // Sidebar: 8rem
+        // Other 8 Columns:
+            // fixed column width -- 1140px/8columns = 142.5 ~ 140px --> 14rem; 
+            // but we use minmax() to make it responsive so it can shrink/grow 
+            // it will always shrink enough to fit the min-content, but have a maximum width of 14rem
+        // 2 minmax(6rem, 1fr) columns that will occupy a minimum of 6rem width & maximum of the remaining space. Also, it will act as bleed columns for the content
+    
+    // Test
+    // & > * {
+    //     padding: 40px;
+    //     font-size: 3rem;
+    // }
+}

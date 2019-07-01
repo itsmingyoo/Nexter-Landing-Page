@@ -1,0 +1,41 @@
+.features {
+    // background-color: $color-grey-light-2; test
+    grid-column: center-start / center-end;
+
+    margin: 15rem 0;
+
+    //SUB-GRID
+    display: grid;
+
+    //NON-RESPONSIVE COLUMNS
+    // grid-template-columns: repeat(3, 1fr); // only defining the columns and not rows; if we define the rows then we may have to deal with implicit grids
+
+    //RESPONSIVE COLUMNS
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr)); // shrinks our columns into new rows if there isn't enough space when you shrink the website
+
+
+    grid-gap: 6rem;
+    align-items: start; // default was stretch, and that caused a gap between our ".feature" element's heading-4 and text so we're aligning them to the start
+
+}
+
+.feature {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-row-gap: 1.5rem;
+    grid-column-gap: 2.5rem;
+
+    &__icon {
+        fill: $color-primary; // icon color
+        width: 4.5rem; // icon height/width are usually the same
+        height: 4.5rem;
+
+        grid-row: 1 / span 2; // expands the icon to take the entire first column, meaning it has to span across all rows. we can't use '-1' here because that will only expand to the end of the 'explicit grid' which we didnt define, therefore we have to use 'span 2'
+
+        transform: translateY(-1rem); // moves icon up 1rem, just like in the final project
+    }
+
+    &__text {
+        font-size: 1.7rem;
+    }
+}
