@@ -9,12 +9,26 @@
     justify-items: center; // centers the 'top 3 realtors' text; this property only affects the text and not the list because the list items are already the the size of the cell/column width which in turn won't be affected by centering
     grid-row-gap: 2rem; // spaccing between 'top 3 realtors' text and the grid list items
 
+    @media only screen and (max-width: $bp-large) {
+        grid-column: 1 / -1; 
+    }
+
     &__list {
         display: grid;
         grid-template-columns: min-content max-content; // min for img, max for txt
         grid-column-gap: 2rem;
         grid-row-gap: 5vh; //5% of viewport height, so the margin changes when we change the height of the viewport on large screens
         align-items: center;
+
+        // puts the top 3 realtors side by side
+        @media only screen and (max-width: $bp-large) {
+            grid-template-columns: repeat(3, min-content max-content); //minmax() wouldnt work here; we can put multiple tracks per repeat function
+        }
+
+        // changes it back to columns @ 600px
+        @media only screen and (max-width: $bp-small) {
+            grid-template-columns: min-content max-content;
+        }
     }
 
     &__img {

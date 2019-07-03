@@ -7,10 +7,20 @@
     padding-top: 4rem;
 
     display: grid;
-    grid-template-rows: 1fr min-content 6rem 1fr;
-    grid-template-columns: max-content;
+    grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+    grid-template-columns: minmax(min-content, max-content); // previously :max-content; changed to minmax(min-content, max-content) for responsiveness
     grid-row-gap: 1.5rem;
     justify-content: center;
+
+    // header takes up the empty space when we removed top3realtors
+    @media only screen and (max-width: $bp-large) {
+        grid-column: 1 / -1; 
+    }
+
+    // lowering padding @600px
+    @media only screen and (max-width: $bp-small) {
+        padding: 5rem;
+    }
 
     &__logo {
         height: 3rem;
@@ -47,9 +57,14 @@
         grid-template-columns: repeat(4, 1fr);
         grid-column-gap: 3rem;
         justify-items: center;
+        align-items: center;
 
         img { // declaring this img directly here bc no class defined
-            height: 2.5rem; // we're giving these logos a defined height only so they look even; if we gave them a width, then they'd have a different height
+            // height: 2.5rem; // we're giving these logos a defined height only so they look even; if we gave them a width, then they'd have a different height
+            
+            //we must specify max-height bc the website doesn't shrink the header's width since it is based on these icon's set height from above 2.5rem; we also have to change the grid-template-columns: max-content; to minmax(min-content, max-content) in the header
+            max-height: 2.5rem;
+            max-width: 100%;
             filter: brightness(70%); // makes the icons look a little faded/darker
         }
     }

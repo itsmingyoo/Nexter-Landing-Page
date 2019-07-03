@@ -15,6 +15,13 @@ $font-primary: 'Nunito', sans-serif;
 $font-display: 'Josefin Sans', sans-serif;
 
 
+// RESPONSIVE BREAKPOINTS
+$bp-largest: 75em;      //@1200px /16=75em
+$bp-large: 62.5em;      //@1000px /16=62.5em
+$bp-medium: 50em;       //@800px /16=50em
+$bp-small: 37.5em;      //@600px /16=37.5em
+
+
 // GLOBAL RESET
 *,
 *::before,
@@ -26,7 +33,11 @@ $font-display: 'Josefin Sans', sans-serif;
 
 html {
     box-sizing: border-box;
-    font-size: 62.5%;
+    font-size: 62.5%; // 1rem = 10px 10/16
+    
+    @media only screen and (max-width: $bp-largest) {
+        font-size: 50%; // 1rem = 8px
+    }
 }
 
 body {
@@ -52,6 +63,29 @@ body {
             // but we use minmax() to make it responsive so it can shrink/grow 
             // it will always shrink enough to fit the min-content, but have a maximum width of 14rem
         // 2 minmax(6rem, 1fr) columns that will occupy a minimum of 6rem width & maximum of the remaining space. Also, it will act as bleed columns for the content
+
+    /*
+    //SHORTHAND CODE FOR TEMPLATE ROWS & COLUMNS - NEVER USE BC ITS MORE CONFUSING
+
+    grid-template: 80vh min-content 40vw repeat(3, min-content) / [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end]; 
+    
+    grid-template: rows / columns; 
+    
+    */
+
+        
+    //removing first column and adding a top row for the new placement of the sidebar
+    @media only screen and (max-width: $bp-large) {
+        grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content); 
+        grid-template-columns: [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end]; 
+    }
+
+    //moving top3realtors below header && story below story pictures
+    @media only screen and (max-width: $bp-medium) {
+        grid-template-rows: 6rem calc(100vh - 6rem); // added min-content for third row which is for the new are for top3realtors; 100vh calc function for the header to take the entire space where top3realtors used to be--we used calc and subtracted 6rem bc that 6rem was also added to the bottom of the header (which is too much unnecessary extra space) when we added a new top row that was 6rem for the sidebar--this is also so we can start the next section when we start scrolling down;
+        // also we removed all the other rows bc the automatic algorithm will take care of aligning to new rows for us
+        // the first two rows are the only rows we want to style, the others will be styled according to the size of their content
+    }
     
     // Test
     // & > * {
