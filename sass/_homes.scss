@@ -1,4 +1,84 @@
 .homes {
     background-color: $color-secondary;
     grid-column: center-start / center-end;
+    margin: 15rem 0;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-gap: 7rem;
+
+}
+
+.home {
+    background-color: $color-grey-light-1;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-row-gap: 3.5rem;
+
+    &__img {
+        width: 100%;
+        grid-row: 1 / 2;
+        grid-column: 1 / -1;
+        z-index: 1;
+    }
+
+    &__like {
+        grid-row: 1 / 2;
+        grid-column: 2 / 3;
+        fill: $color-primary;
+        height: 2rem;
+        width: 2rem;
+        z-index: 2; // like/heart button always on top of __img
+        justify-self: end; // aligns only like button to the end
+        margin: 1rem;
+    }
+
+    &__name {
+        grid-row: 1 / 2;
+        grid-column: 1 / -1;
+        justify-self: center; // align to middle
+        align-self: end; // align to bottom
+        z-index: 2; // overlap img
+        
+        width: 80%;
+        font-family: $font-display;
+        font-size: 1.6rem;
+        text-align: center;
+        padding: 1.25rem;
+        background-color: $color-secondary;
+        color: #fff;
+        font-weight: 400;
+        transform: translateY(50%); // moves 50% down
+    }
+
+    // fixes the OCD margin from __name to these two elements bc the __name was overlapping the img and these elements and had an uneven gap/margin. we couldnt change it with grid as its not possible yet so we have to manually add the margin to these two elements
+    &__location,
+    &__rooms {
+        margin-top: 2.5rem;
+    }
+
+    &__location,
+    &__rooms,
+    &__area,
+    &__price {
+
+        font-size: 1.5rem;
+        margin-left: 2rem;
+
+        display: flex;
+        align-items: center;
+
+        // we didnt give these svg icons a class name so we're styling them by nesting them here
+        svg { 
+            fill: $color-primary;
+            height: 2rem;
+            width: 2rem;
+            margin-right: 1rem;
+        }
+    }
+
+    &__btn {
+        grid-column: 1 / -1;
+    }
 }
