@@ -1,4 +1,47 @@
 .footer {
     background-color: $color-secondary;
     grid-column: full-start / full-end;
+    padding: 8rem;
+    
+}
+
+.nav {
+    list-style: none;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); // auto-fit figures out how many tracks there should be; size should be always 20rem minimum, but fill to 1fr -- in other words there will be more rows to fit the content if it can't hold all items with 20rem in one row
+
+    grid-gap: 2rem; // grid-gap is useful here instead of flexbox because we can just give it a gap and it will auto-align it with the space; but if we use flexbox, we'd have to give each item a margin-right and then give the last item a margin of 0 which is inconvenient
+    align-items: center;
+
+    &__link:link,
+    &__link:visited {
+        font-size: 1.4rem;
+        color: #fff;
+        text-decoration: none; // gets rid of underline
+        font-family: $font-display;
+        text-transform: uppercase;
+        text-align: center;
+        padding: 1.5rem;
+        display: block;
+        transition: all .2s;
+    }
+
+    &__link:hover,
+    &__link:active {
+        background-color: rgba(#fff, .05); //this will make the bg slightly lighter blue with this alpha
+        transform: translateY(-3px);
+    }
+}
+
+.copyright {
+    font-size: 1.4rem;
+    color: $color-grey-light-2;
+    margin-top: 6rem;
+    text-align: center;
+
+    //decrease its width and center the text
+    width: 70%; // this only makes the width smaller, but doesnt center it
+    margin-right: auto; // these two margins centers the text
+    margin-left: auto;
 }
